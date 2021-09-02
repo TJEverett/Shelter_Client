@@ -1,0 +1,16 @@
+@model ShelterClient.Models.Login
+
+<h1>User Authentication</h1>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Username)
+  @Html.TextBoxFor(model => model.Username)
+
+  @Html.LabelFor(model => model.Password)
+  @Html.TextBoxFor(model => model.Password)
+  
+  <input type="submit" value="Authenticate" />
+}
+
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
