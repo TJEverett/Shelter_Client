@@ -17,5 +17,15 @@ namespace ShelterClient.Models
       IRestResponse response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
+
+    public static async Task LoginPost(string userInfo, string token)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest("login/new", Method.POST);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddHeader("Authorization", $"Bearer {token}");
+      request.AddJsonBody(userInfo);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+    }
   }
 }

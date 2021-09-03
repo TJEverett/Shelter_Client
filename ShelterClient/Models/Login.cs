@@ -28,5 +28,12 @@ namespace ShelterClient.Models
         return null;
       }
     }
+
+    public static async Task Post(Login userInfo, string token)
+    {
+      string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
+      await ApiHelper.LoginPost(jsonUserInfo, token);
+    }
+
   }
 }

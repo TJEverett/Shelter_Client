@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShelterClient.Models;
@@ -39,5 +40,35 @@ namespace ShelterClient.Controllers
         return RedirectToAction("Index", "Home");
       }
     }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if(token == null)
+      {
+        return RedirectToAction("Validate");
+      }
+      else
+      {
+        return View();
+      }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Create(Login userInfo)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if(token == null)
+      {
+        return RedirectToAction("Validate");
+      }
+      else
+      {
+        await Login.Post(userInfo, token);
+        return RedirectToAction("Create");
+      }
+    }
+
   }
 }
