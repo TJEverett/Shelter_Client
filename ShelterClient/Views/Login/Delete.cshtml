@@ -1,6 +1,6 @@
 @model ShelterClient.Models.Login
 
-<h1>User Authentication</h1>
+<h1>Delete User Form:</h1>
 
 @using (Html.BeginForm())
 {
@@ -10,10 +10,7 @@
   @Html.LabelFor(model => model.Password)
   @Html.TextBoxFor(model => model.Password)
   
-  <input type="submit" value="Authenticate" />
+  <input type="submit" value="Delte This User" />
 }
 
-<p>@Html.ActionLink("Add New User", "Create")</p>
-<p>@Html.ActionLink("Delete User", "Delete")</p>
-<br>
 <p>@Html.ActionLink("HomePage", "Index", "Home")</p>

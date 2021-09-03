@@ -27,5 +27,15 @@ namespace ShelterClient.Models
       request.AddJsonBody(userInfo);
       IRestResponse response = await client.ExecuteTaskAsync(request);
     }
+
+    public static async Task LoginDelete(string userInfo, string token)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest("login/delete", Method.DELETE);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddHeader("Authorization", $"Bearer {token}");
+      request.AddJsonBody(userInfo);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+    }
   }
 }

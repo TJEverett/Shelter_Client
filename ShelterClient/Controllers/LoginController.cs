@@ -70,5 +70,34 @@ namespace ShelterClient.Controllers
       }
     }
 
+    [HttpGet]
+    public IActionResult Delete()
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if(token == null)
+      {
+        return RedirectToAction("Validate");
+      }
+      else
+      {
+        return View();
+      }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Delete(Login userInfo)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if(token == null)
+      {
+        return RedirectToAction("Validate");
+      }
+      else
+      {
+        await Login.Delete(userInfo, token);
+        return RedirectToAction("Delete");
+      }
+    }
+
   }
 }

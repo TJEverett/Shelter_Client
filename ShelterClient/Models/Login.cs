@@ -35,5 +35,10 @@ namespace ShelterClient.Models
       await ApiHelper.LoginPost(jsonUserInfo, token);
     }
 
+    public static async Task Delete(Login userInfo, string token)
+    {
+      string jsonUserInfo = JsonConvert.SerializeObject(userInfo);
+      await ApiHelper.LoginDelete(jsonUserInfo, token);
+    }
   }
 }
