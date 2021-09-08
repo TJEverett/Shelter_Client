@@ -37,5 +37,22 @@ namespace ShelterClient.Models
       request.AddJsonBody(userInfo);
       IRestResponse response = await client.ExecuteTaskAsync(request);
     }
+
+    // Cat Routes
+    public static async Task<string> CatGetAllGendered(string gender)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"cats?gender={gender}", Method.GET);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
+
+    public static async Task<string> CatGetAllBoth(string gender, bool isKitten)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"cats?gender={gender}&isKitten={isKitten}", Method.GET);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
   }
 }

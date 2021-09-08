@@ -1,0 +1,21 @@
+<h1>Aviable Cats</h1>
+<h4>Filters:</h4>
+@using (Html.BeginForm())
+{
+  @Html.DropDownList("gender")
+  @Html.DropDownList("isKitten")
+  <input type="submit" value="Filter" />
+}
+<br>
+<ol>
+  @foreach (Cat cat in Model)
+  {
+    <ul>
+      <li>Name: @cat.Name</li>
+      <li>Coloring: @cat.Coloring</li>
+    </ul>
+    <a href="/cats/details/@(cat.CatId)"><p>View Details</p></a>
+  }
+</ol>
+<br>
+<p>@Html.ActionLink("Add Cat", "Create")</p>
