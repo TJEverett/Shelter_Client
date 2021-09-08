@@ -8,20 +8,32 @@ namespace ShelterClient.Controllers
 {
   public class LoginController : Controller
   {
-    [HttpGet("/Login")]
-    public IActionResult Validate()
+    [HttpGet("/login/user/{message}")]
+    public IActionResult Validate(int message)
     {
+      if (message == 1)
+      {
+        ViewBag.message = "Login Failed";
+      }
+      else if (message == 2)
+      {
+        ViewBag.message = "You are not logged in";
+      }
+      else
+      {
+        ViewBag.message = "";
+      }
       return View();
     }
 
-    [HttpPost("/Login")]
+    [HttpPost("/login/user/{message}")]
     public IActionResult Validate(Login userInfo)
     {
       string token = Login.GetToken(userInfo);
 
       if(token == null)
       {
-        return RedirectToAction("Validate");
+        return RedirectToAction("Validate", new {message = 1});
       }
       else
       {
@@ -41,13 +53,13 @@ namespace ShelterClient.Controllers
       }
     }
 
-    [HttpGet]
+    [HttpGet("/login/new")]
     public IActionResult Create()
     {
       var token = Request.Cookies["sugarCookie"];
       if(token == null)
       {
-        return RedirectToAction("Validate");
+        return RedirectToAction("Validate", new {message = 2});
       }
       else
       {
@@ -55,13 +67,13 @@ namespace ShelterClient.Controllers
       }
     }
 
-    [HttpPost]
+    [HttpPost("/login/new")]
     public async Task<ActionResult> Create(Login userInfo)
     {
       var token = Request.Cookies["sugarCookie"];
       if(token == null)
       {
-        return RedirectToAction("Validate");
+        return RedirectToAction("Validate", new { message = 2 });
       }
       else
       {
@@ -70,13 +82,13 @@ namespace ShelterClient.Controllers
       }
     }
 
-    [HttpGet]
+    [HttpGet("/login/delete")]
     public IActionResult Delete()
     {
       var token = Request.Cookies["sugarCookie"];
       if(token == null)
       {
-        return RedirectToAction("Validate");
+        return RedirectToAction("Validate", new {message = 2});
       }
       else
       {
@@ -84,13 +96,13 @@ namespace ShelterClient.Controllers
       }
     }
 
-    [HttpPost]
+    [HttpPost("/login/delete")]
     public async Task<ActionResult> Delete(Login userInfo)
     {
       var token = Request.Cookies["sugarCookie"];
       if(token == null)
       {
-        return RedirectToAction("Validate");
+        return RedirectToAction("Validate", new { message = 2 });
       }
       else
       {
