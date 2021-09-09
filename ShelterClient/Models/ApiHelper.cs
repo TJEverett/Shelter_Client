@@ -72,5 +72,15 @@ namespace ShelterClient.Models
       request.AddJsonBody(newCat);
       IRestResponse response = await client.ExecuteTaskAsync(request);
     }
+
+    public static async Task CatPut(int id, string newCat, string token)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"cats/{id}", Method.PUT);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddHeader("Authorization", $"Bearer {token}");
+      request.AddJsonBody(newCat);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+    }
   }
 }

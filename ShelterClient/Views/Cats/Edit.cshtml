@@ -1,0 +1,30 @@
+@model ShelterClient.Models.Cat
+
+<h1>New Cat</h1>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CatId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+<br/>
+  @Html.Label("Weight in Kilograms")
+  @Html.EditorFor(model => model.WeightKilo)
+<br/>
+  @Html.Label("Is the cat Female")
+  @Html.EditorFor(model => model.IsFemale)
+<br/>
+  @Html.LabelFor(model => model.Birthday)
+  @Html.EditorFor(model => model.Birthday)
+<br/>
+  @Html.LabelFor(model => model.Coloring)
+  @Html.EditorFor(model => model.Coloring)
+<br/>
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+<br/>
+  <input type="submit" value="Save" />
+}
+<br/>
+<p>@Html.ActionLink("View Cats", "Index")</p>

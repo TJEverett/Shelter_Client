@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -58,7 +59,7 @@ namespace ShelterClient.Controllers
       return View(Cat.GetDetails(id));
     }
 
-    public ActionResult Create(int id)
+    public ActionResult Create()
     {
       var token = Request.Cookies["sugarCookie"];
       if (token == null)
@@ -83,6 +84,34 @@ namespace ShelterClient.Controllers
       {
         await Cat.NewCat(cat, token);
         return RedirectToAction("Index");
+      }
+    }
+
+    public ActionResult Edit(int id)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        return View(Cat.GetDetails(id));
+      }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Edit(Cat cat)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        await Cat.UpdateCat(cat, token);
+        return RedirectToAction("Details", new {id = cat.CatId});
       }
     }
   }
