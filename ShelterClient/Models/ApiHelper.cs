@@ -91,5 +91,22 @@ namespace ShelterClient.Models
       request.AddHeader("Authorization", $"Bearer {token}");
       IRestResponse response = await client.ExecuteTaskAsync(request);
     }
+
+    // Dog Routes
+    public static async Task<string> DogGetAllGendered(string gender)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"dogs?gender={gender}", Method.GET);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
+
+    public static async Task<string> DogGetAllBoth(string gender, bool isPuppy)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"dogs?gender={gender}&isPuppy={isPuppy}", Method.GET);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
   }
 }

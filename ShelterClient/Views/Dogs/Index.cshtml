@@ -1,0 +1,22 @@
+<h1>Aviable Dogs</h1>
+<h4>Filters:</h4>
+@using(Html.BeginForm())
+{
+  @Html.DropDownList("gender")
+  @Html.DropDownList("isPuppy")
+  <input type="submit" value="Filter" />
+}
+<br>
+<ol>
+  @foreach (Dog dog in Model)
+  {
+    <ul>
+      <li>Name: @dog.Name</li>
+      <li>Breed: @dog.Breed</li>
+      <li>Weight: @dog.WeightKilo Kilograms</li>
+    </ul>
+    <a href="/dogs/details/@(dog.DogId)"><p>View Details</p></a>
+  }
+</ol>
+<br>
+<p>@Html.ActionLink("Add Dog", "Create")</p>
