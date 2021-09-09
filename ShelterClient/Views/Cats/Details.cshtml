@@ -1,0 +1,21 @@
+<h1>@Model.Name The Cat:</h1>
+
+<a href="/cats/details/@(Model.CatId)"><p>Edit Details</p></a>
+
+<ul>
+  <li><strong>Name:</strong> @Model.Name</li>
+  @if(@Model.IsFemale == true)
+  {
+    <li><strong>Gender:</strong> Female</li>
+  }
+  else
+  {
+    <li><strong>Gender:</strong> Male</li>
+  }
+  <li><strong>Birthday:</strong> @Model.Birthday.Date.ToString("d")</li>
+  <li><strong>Last Weight:</strong> @Model.WeightKilo Kilograms</li>
+  <li><strong>Coloring:</strong> @Model.Coloring</li>
+  <li><strong>Description:</strong> @Model.Description</li>
+</ul>
+
+<p>@Html.ActionLink("View Cats", "Index")</p>

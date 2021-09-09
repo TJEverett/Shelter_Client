@@ -54,5 +54,13 @@ namespace ShelterClient.Models
       IRestResponse response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
+
+    public static async Task<string> CatGetDetails(int id)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"cats/{id}", Method.GET);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
   }
 }

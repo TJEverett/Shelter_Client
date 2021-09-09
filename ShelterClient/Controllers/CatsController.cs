@@ -47,8 +47,13 @@ namespace ShelterClient.Controllers
           new SelectListItem { Selected = false, Text = "Kittens only", Value = "true"},
           new SelectListItem { Selected = false, Text = "Adults only", Value = "false"}
         }, "Value", "Text", 1);
-        
+
       return View(Cat.GetCats(gender, isKitten));
+    }
+
+    public ActionResult Details(int id)
+    {
+      return View(Cat.GetDetails(id));
     }
   }
 }

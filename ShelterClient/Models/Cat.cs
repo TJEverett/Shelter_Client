@@ -33,5 +33,14 @@ namespace ShelterClient.Models
       return catsList;
     }
 
+    public static Cat GetDetails(int id)
+    {
+      Task<string> apiCallTask = ApiHelper.CatGetDetails(id);
+      string result = apiCallTask.Result;
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      Cat cat = JsonConvert.DeserializeObject<Cat>(jsonResponse.ToString());
+      return cat;
+    }
+
   }
 }
