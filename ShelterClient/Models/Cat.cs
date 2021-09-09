@@ -42,5 +42,11 @@ namespace ShelterClient.Models
       return cat;
     }
 
+    public static async Task NewCat(Cat cat, string token)
+    {
+      string jsonCat = JsonConvert.SerializeObject(cat);
+      await ApiHelper.CatPost(jsonCat, token);
+    }
+
   }
 }

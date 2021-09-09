@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShelterClient.Models;
@@ -54,6 +56,34 @@ namespace ShelterClient.Controllers
     public ActionResult Details(int id)
     {
       return View(Cat.GetDetails(id));
+    }
+
+    public ActionResult Create(int id)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        return View();
+      }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Create(Cat cat)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        await Cat.NewCat(cat, token);
+        return RedirectToAction("Index");
+      }
     }
   }
 }
