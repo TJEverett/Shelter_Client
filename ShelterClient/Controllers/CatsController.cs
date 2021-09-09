@@ -114,5 +114,33 @@ namespace ShelterClient.Controllers
         return RedirectToAction("Details", new {id = cat.CatId});
       }
     }
+
+    public ActionResult Delete(int id)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        return View(Cat.GetDetails(id));
+      }
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public async Task<ActionResult> ConfirmDelete(int id)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        await Cat.DeleteCat(id, token);
+        return RedirectToAction("Index");
+      }
+    }
   }
 }

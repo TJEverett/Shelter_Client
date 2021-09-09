@@ -54,5 +54,9 @@ namespace ShelterClient.Models
       await ApiHelper.CatPut(cat.CatId, jsonCat, token);
     }
 
+    public static async Task DeleteCat(int id, string token)
+    {
+      await ApiHelper.CatDelete(id, token);
+    }
   }
 }
