@@ -34,5 +34,14 @@ namespace ShelterClient.Models
       return dogsList;
     }
 
+    public static Dog GetDetails(int id)
+    {
+      Task<string> apiCallTask = ApiHelper.DogGetDetails(id);
+      string result = apiCallTask.Result;
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      Dog dog = JsonConvert.DeserializeObject<Dog>(jsonResponse.ToString());
+      return dog;
+    }
+
   }
 }

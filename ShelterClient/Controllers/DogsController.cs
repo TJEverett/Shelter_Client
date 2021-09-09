@@ -49,5 +49,10 @@ namespace ShelterClient.Controllers
 
       return View(Dog.GetDogs(gender, isPuppy));
     }
+
+    public ActionResult Details(int id)
+    {
+      return View(Dog.GetDetails(id));
+    }
   }
 }
