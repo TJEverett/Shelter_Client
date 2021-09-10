@@ -111,5 +111,33 @@ namespace ShelterClient.Controllers
         return RedirectToAction("Details", new { id = dog.DogId});
       }
     }
+
+    public ActionResult Delete(int id)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        return View(Dog.GetDetails(id));
+      }
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public async Task<ActionResult> ConfirmDelete(int id)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        await Dog.DeleteDog(id, token);
+        return RedirectToAction("Index");
+      }
+    }
   }
 }

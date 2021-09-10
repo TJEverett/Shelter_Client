@@ -136,5 +136,14 @@ namespace ShelterClient.Models
       request.AddJsonBody(newDog);
       IRestResponse response = await client.ExecuteTaskAsync(request);
     }
+
+    public static async Task DogDelete(int id, string token)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"dogs/{id}", Method.DELETE);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddHeader("Authorization", $"Bearer {token}");
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+    }
   }
 }

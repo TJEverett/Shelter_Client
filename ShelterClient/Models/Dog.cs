@@ -55,5 +55,9 @@ namespace ShelterClient.Models
       await ApiHelper.DogPut(dog.DogId, jsonDog, token);
     }
 
+    public static async Task DeleteDog(int id, string token)
+    {
+      await ApiHelper.DogDelete(id, token);
+    }
   }
 }
