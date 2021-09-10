@@ -83,5 +83,33 @@ namespace ShelterClient.Controllers
         return RedirectToAction("Index");
       }
     }
+
+    public ActionResult Edit(int id)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        return View(Dog.GetDetails(id));
+      }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Edit(Dog dog)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        await Dog.UpdateDog(dog, token);
+        return RedirectToAction("Details", new { id = dog.DogId});
+      }
+    }
   }
 }

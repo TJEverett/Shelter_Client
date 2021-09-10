@@ -126,5 +126,15 @@ namespace ShelterClient.Models
       request.AddJsonBody(newDog);
       IRestResponse response = await client.ExecuteTaskAsync(request);
     }
+
+    public static async Task DogPut(int id, string newDog, string token)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest($"dogs/{id}", Method.PUT);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddHeader("Authorization", $"Bearer {token}");
+      request.AddJsonBody(newDog);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+    }
   }
 }

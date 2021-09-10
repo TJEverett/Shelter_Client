@@ -1,0 +1,35 @@
+@model ShelterClient.Models.Dog
+
+<h1>Update Dog</h1>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.DogId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+<br>
+  @Html.Label("Weight in Kilograms")
+  @Html.EditorFor(model => model.WeightKilo)
+<br>
+  @Html.Label("Is the dog Female")
+  @Html.EditorFor(model => model.IsFemale)
+<br>
+  @Html.LabelFor(model => model.Birthday)
+  @Html.EditorFor(model => model.Birthday)
+<br>
+  @Html.LabelFor(model => model.Breed)
+  @Html.EditorFor(model => model.Breed)
+<br>
+  @Html.LabelFor(model => model.Coloring)
+  @Html.EditorFor(model => model.Coloring)
+<br>
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+<br>
+  <input type="submit" value="Update" />
+}
+<br>
+<p>@Html.ActionLink("Remove Dog", "Delete", new { id = @Model.DogId })</p>
+<br>
+<p>@Html.ActionLink("View Dogs", "Index")</p>

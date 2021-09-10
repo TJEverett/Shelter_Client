@@ -49,5 +49,11 @@ namespace ShelterClient.Models
       await ApiHelper.DogPost(jsonDog, token);
     }
 
+    public static async Task UpdateDog(Dog dog, string token)
+    {
+      string jsonDog = JsonConvert.SerializeObject(dog);
+      await ApiHelper.DogPut(dog.DogId, jsonDog, token);
+    }
+
   }
 }
