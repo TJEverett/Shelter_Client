@@ -116,5 +116,15 @@ namespace ShelterClient.Models
       IRestResponse response = await client.ExecuteTaskAsync(request);
       return response.Content;
     }
+
+    public static async Task DogPost(string newDog, string token)
+    {
+      RestClient client = new RestClient(apiRoute);
+      RestRequest request = new RestRequest("dogs", Method.POST);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddHeader("Authorization", $"Bearer {token}");
+      request.AddJsonBody(newDog);
+      IRestResponse response = await client.ExecuteTaskAsync(request);
+    }
   }
 }

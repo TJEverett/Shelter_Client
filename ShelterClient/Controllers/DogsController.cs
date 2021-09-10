@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShelterClient.Models;
@@ -53,6 +54,34 @@ namespace ShelterClient.Controllers
     public ActionResult Details(int id)
     {
       return View(Dog.GetDetails(id));
+    }
+
+    public ActionResult Create()
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        return View();
+      }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Create(Dog dog)
+    {
+      var token = Request.Cookies["sugarCookie"];
+      if (token == null)
+      {
+        return RedirectToAction("Validate", "Login", new { message = 2 });
+      }
+      else
+      {
+        await Dog.NewDog(dog, token);
+        return RedirectToAction("Index");
+      }
     }
   }
 }

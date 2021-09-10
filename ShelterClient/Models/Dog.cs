@@ -43,5 +43,11 @@ namespace ShelterClient.Models
       return dog;
     }
 
+    public static async Task NewDog(Dog dog, string token)
+    {
+      string jsonDog = JsonConvert.SerializeObject(dog);
+      await ApiHelper.DogPost(jsonDog, token);
+    }
+
   }
 }
