@@ -1,6 +1,6 @@
 # Shelter Client
 
-#### _Interface with the Shelter API, 09/13/2021_
+#### _Interface with the Shelter API, 09/16/2021_
 
 #### By _**Tristen Everett**_
 
@@ -24,10 +24,18 @@ This project was an attempt at showing the skills I learned to program in C# to 
 
 1. Clone this Repo
 2. Run `dotnet restore` from within /ShelterClient file location
+3. Ensure the ShelterAPI is running (follow instruction in that project's [README](https://github.com/TJEverett/Shelter_API "ShelterAPI"))
 3. Change the `apiRoute` variable in the /ShelterClient/Model/ApiHelper.cs file to match the path to where your api is hosted, by default the api is hosted on http://localhost:5000/api
 4. Run `dotnet build` from within /ShelterClient file location
 5. Run `dotnet run` from within /ShelterClient file location
 6. Using your preferred web browser navigate to http://localhost:5004
+8. Navigate to login with default user
+   * username: `admin`
+   * password: `cat123dog`
+
+### Current Bugs and Usage Limitations
+
+* Cookies must be accepted on user's computer so login token can be stored
 
 ## Technologies Used
 
